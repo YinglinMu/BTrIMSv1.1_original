@@ -163,6 +163,7 @@ PROGRAM back_traj
 
 		! ERA5 gives total precipitation in m. Multiply by 1000 to get it in mm as model expects.
 		precip = precip * 1000
+  		cpre = cpre * 1000
 
 		! calculate the model level just above the boundary layer height
 		call calc_pbl_lev(pbl_hgt,pres,psfc,pbl_lev)
@@ -192,7 +193,7 @@ PROGRAM back_traj
 
 
 		print *, 'Starting parallelisation'
-!$OMP PARALLEL DEFAULT(PRIVATE) SHARED(pw,tpw,tpw_pbl,u,v,w,pres,psfc,evap,precip,mix,mixtot,pbl_lev,lat2d,lon2d,orec,outncid,wvcid,wvc2id,xlocid,ylocid,dayid,opreid,wsmask,daytsteps,totsteps,indatatsteps,datadaysteps,datatotsteps,dim_i,dim_j,dim_k,sday,smon,syear,mon,year,day,dd,totpts,ssdim)
+!$OMP PARALLEL DEFAULT(PRIVATE) SHARED(pw,tpw,tpw_pbl,u,v,w,pres,cpre,psfc,evap,precip,mix,mixtot,pbl_lev,lat2d,lon2d,orec,outncid,wvcid,wvc2id,xlocid,ylocid,dayid,opreid,wsmask,daytsteps,totsteps,indatatsteps,datadaysteps,datatotsteps,dim_i,dim_j,dim_k,sday,smon,syear,mon,year,day,dd,totpts,ssdim)
 		!allocate these arrays for each thread
 		ALLOCATE( WV_cont(dim_j,dim_i),WV_cont_day(dim_j,dim_i), &
 				WV_cont_apbl(dim_j,dim_i),WV_cont_day_apbl(dim_j,dim_i), &
